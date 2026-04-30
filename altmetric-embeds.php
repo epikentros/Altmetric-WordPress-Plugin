@@ -3,11 +3,16 @@
  * Plugin Name: Altmetric embeds
  * Plugin URI: http://api.altmetric.com/embeds.html
  * Description: This plugin allows you to easily add altmetric embeds
- * Version: 0.0.7
- * Author: Altmetric
- * Author URI: http://altmetric.com
+ * Version: 0.0.8
+ * Author: epikentros (fork of original by Altmetric)
+ * Author URI: https://github.com/epikentros
  * License: GPL2
- * */
+ *
+ * Changelog:
+ * 0.0.8 - Fixed PHP 8.x compatibility: non-static methods declared as static
+ *         to prevent fatal errors when used as WordPress callbacks.
+ *         Original plugin by Altmetric (deprecated).
+ */
 
 class Altmetric
 {
@@ -15,7 +20,7 @@ class Altmetric
     /**
      * NOTE: This method of substituting text into divs is deprecated
      */
-    public function dois($content)
+    public static function dois($content)
     {
         $new_content = preg_replace(
             "/altmetric:(doi|arxiv-id|pmid|handle):(\S+):popover:(\S+):float:(\S+):altmetric/i",
@@ -30,7 +35,7 @@ class Altmetric
         }
     }
 
-    public function altmetricCode($atts, $content, $tag)
+    public static function altmetricCode($atts, $content, $tag)
     {
         extract(shortcode_atts(array(
             'doi' => null,
@@ -113,7 +118,7 @@ class Altmetric
         return $embed_element;
     }
 
-    public function embedCode($content)
+    public static function embedCode($content)
     {
         $content = sprintf(
             "<script type='text/javascript' src='https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js'></script>%s",
