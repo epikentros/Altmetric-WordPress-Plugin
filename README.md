@@ -1,12 +1,14 @@
-# THIS PROJECT IS DEPRECATED
+# Altmetric WordPress Plugin — Community Fork
 
-Altmetric-WordPress-Plugin is not maintained anymore.
+> **This is an unofficial community fork** of the original [Altmetric WordPress Plugin](https://github.com/altmetric/wordpress-plugin), which is no longer maintained by Altmetric.
+> This fork fixes PHP 8.x compatibility issues that caused a fatal error on activation.
+> All original functionality is preserved.
 
-# Altmetric WordPress plugin
+---
 
-The Altmetric WordPress plugin provides [Altmetric embedded
-badge](http://api.altmetric.com/embeds.html) support to
-your WordPress blog.
+# Altmetric WordPress Plugin
+
+The Altmetric WordPress plugin provides [Altmetric embedded badge](http://api.altmetric.com/embeds.html) support to your WordPress blog.
 
 ## Features
 
@@ -14,31 +16,34 @@ your WordPress blog.
 
 <pre><code>&lt;script type='text/javascript' src='https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js'&gt;&lt;/script&gt;</code></pre>
 
-* Ability to include an embedded altmetric badge for any article by referring to
+* Ability to include an embedded Altmetric badge for any article by referring to
   its [DOI](http://en.wikipedia.org/wiki/Digital_object_identifier), [arXivID](http://arxiv.org/help/arxiv_identifier),
   [PubMed ID](http://www.ncbi.nlm.nih.gov/pmc/pmctopmid/) or similar identifier
 
+## Installation
+
+### Via WordPress Admin (recommended)
+
+1. Download the latest release ZIP from the [Releases](../../releases) page
+2. In your WordPress dashboard, go to **Plugins → Add New → Upload Plugin**
+3. Upload the ZIP file and click **Install Now**
+4. Click **Activate Plugin**
+
+### Via FTP
+
+1. Copy `altmetric-embeds.php` to your `/wp-content/plugins/` directory
+2. Navigate to the **Plugins** dashboard page
+3. Click **Activate** for the "Altmetric embeds" plugin
+
 ## Usage
 
-1. Copy the `altmetric-embeds` directory into your `wp-content/plugins` directory
-1. Navigate to the "Plugins" dashboard page
-1. Click on "Activate" for the "Altmetric embeds" plugin
-
-Now the plugin is activated, you can add Altmetric embedded badges to your blog
-posts. The format of the shortcode you need to insert is as follows:
-
-    [altmetric doi=# THIS PROJECT IS DEPRECATED
-devise-rails-api-authentication is not maintained anymore.u"10.1038/nature.2012.9872"]
-
-Which means - add an embedded donut for the [Nature article](http://dx.doi.org/10.1038/nature.2012.9872)
-with a [DOI](http://en.wikipedia.org/wiki/Digital_object_identifier) of `10.1038/nature.2012.9872`.
+Once the plugin is activated, you can add Altmetric embedded badges to your blog posts using shortcodes.
 
 ### Article identifiers
 
-The only required attribute is some kind of article identifier. You can use any that
-the Altmetric API can understand: doi, pmid, arxiv_id and handle at present.
+The only required attribute is an article identifier. Supported identifiers:
 
-#### doi:
+#### DOI:
 
     [altmetric doi="10.1038/nature.2012.9872"]
 
@@ -46,7 +51,7 @@ the Altmetric API can understand: doi, pmid, arxiv_id and handle at present.
 
     [altmetric arxiv_id="1209.4191"]
 
-#### PubmedId:
+#### PubMed ID:
 
     [altmetric pmid="21771119"]
 
@@ -56,59 +61,43 @@ the Altmetric API can understand: doi, pmid, arxiv_id and handle at present.
 
 ### Type
 
-The type attribute controls which type of embedded badge to include. The choices are: `donut`, `medium-donut`, `large-donut`, `1` and `4`.
-Please refer to the [badge types](http://api.altmetric.com/embeds.html#badge-types) documentation to see what they look like.
+The `type` attribute controls which badge style to display. Available values: `donut`, `medium-donut`, `large-donut`, `1`, `4`.
 
-For example if you want a large-donut (180px x 180px):
+See the [badge types documentation](http://api.altmetric.com/embeds.html#badge-types) for a visual reference.
 
     [altmetric doi="10.1038/nature.2012.9872" type="large-donut"]
 
 ### Popovers
 
-You can add a popover to the embedded badge:
-
     [altmetric doi="10.1038/nature.2012.9872" popover="right"]
 
-The value is where you want the popover to appear relative to the badge.
-Valid values are left, right, top and bottom.
+Valid values: `left`, `right`, `top`, `bottom`.
 
 ### Details
 
-You can add the details to the embed like so:
-
     [altmetric doi="10.1038/nature.2012.9872" details="right"]
 
-Currently, details can only be on the right and you can't mix `popover` and `details` (it's either or) - `popover`
-takes priority.
+Note: `details` can only be placed on the right. You cannot combine `popover` and `details` — `popover` takes priority.
 
-### Floating
-
-If you want to float the entire badge on the page, you can add a float attribute:
+### Float
 
     [altmetric doi="10.1038/nature.2012.9872" float="right"]
 
-This will float the entire element to the right. Valid values are left, right and none.
+Valid values: `left`, `right`, `none`.
 
-### Hide no mentions
-
-If you want to hide the badge when there are no mentions:
+### Hide when no mentions
 
     [altmetric doi="10.1038/nature.2012.9872" hide_no_mentions="true"]
 
-### All singing, all dancing
-
-You can combine any and all of the above attributes, the only required one is an identifier -
-doi, arxiv_id, pmid, handle.
+### Combined example
 
     [altmetric doi="10.1038/nature.2012.9872" float="right" popover="left" style="box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);" class="someclass" type="1"]
 
-The above will embed a 110px x 20px badge, floated on the right with a popover (with more details)
-appearing on the left. It also adds a box shadow around the element, adds a custom CSS class
-(for further styling).
+This embeds a 110×20px badge, floated right, with a popover on the left, a box shadow, and a custom CSS class.
 
 ## License
 
-The Altmetric WordPress Plugin is licensed under the GPL v2 or later.
+Licensed under the GPL v2 or later.
 
 > This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License, version 2, as
@@ -116,14 +105,15 @@ published by the Free Software Foundation.
 
 > This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
 
-> You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
 ## Changelog
+
+### 0.0.8 (2025)
+
+* **PHP 8.x compatibility fix**: declared all class methods as `static` to prevent fatal errors when used as WordPress filter/shortcode callbacks. The original code used non-static methods with a class-name string callback (`array('Altmetric', 'method')`), which was deprecated in PHP 7.x and causes a fatal error in PHP 8.x.
+* Forked and maintained by [@epikentros](https://github.com/epikentros)
 
 ### 0.0.7 (20th May 2013)
 
@@ -131,30 +121,29 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 ### 0.0.6 (14th May 2013)
 
-* Added 'example' attribute for embedding examples of how to use the shortcode
-  as well as the actual embed.
+* Added `example` attribute for embedding shortcode examples alongside the actual badge
 
 ### 0.0.5 (14th May 2013)
 
-* Moved altmetric-embed.php to top level so that tag ZIPs from Github work
+* Moved `altmetric-embeds.php` to top level so that tag ZIPs from GitHub work
 
 ### 0.0.4 (7th May 2013)
 
-* Fix float attribute to not ignore other styles
+* Fix `float` attribute to not ignore other styles
 
 ### 0.0.3 (3rd May 2013)
 
-* Add details attribute
+* Add `details` attribute
 
 ### 0.0.2 (3rd May 2013)
 
-* Add shortcode functionality, thanks to ahoereth on [#wordpress IRC](http://codex.wordpress.org/IRC) for suggesting it
+* Add shortcode functionality
 
 ### 0.0.1 (1st May 2013)
 
-* Official Release
+* Official release
 
-## Author Information
+## Credits
 
-The Altmetric WordPress plugin was created by [Will
-Roe](http://www.digital-science.com/people/william-roe).
+Originally created by [Will Roe](http://www.digital-science.com/people/william-roe) at [Altmetric](https://www.altmetric.com).
+Maintained in this fork by [@epikentros](https://github.com/epikentros).
