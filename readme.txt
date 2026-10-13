@@ -108,7 +108,7 @@ If you want to hide the badge when there are no mentions:
 You can combine any and all of the above attributes, the only required one is an identifier -
 doi, arxiv_id, pmid, handle.
 
-    [altmetric doi="10.1038/nature.2012.9872" float="right" popover="left" style="box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);" class="someclass" type="1"]
+    [altmetric doi="10.1038/nature.2012.9872" float="right" popover="left" style="box-shadow: 0 1px 4px #00000033;" class="someclass" type="1"]
 
 The above will embed a 110px x 20px badge, floated on the right with a popover (with more details)
 appearing on the left. It also adds a box shadow around the element, adds a custom CSS class

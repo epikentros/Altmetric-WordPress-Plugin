@@ -91,9 +91,11 @@ Valid values: `left`, `right`, `none`.
 
 ### Combined example
 
-    [altmetric doi="10.1038/nature.2012.9872" float="right" popover="left" style="box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);" class="someclass" type="1"]
+    [altmetric doi="10.1038/nature.2012.9872" float="right" popover="left" style="box-shadow: 0 1px 4px #00000033;" class="someclass" type="1"]
 
 This embeds a 110×20px badge, floated right, with a popover on the left, a box shadow, and a custom CSS class.
+
+Note on `style`: since 0.0.9 the value is filtered by WordPress' `safecss_filter_attr()`. Plain declarations (`margin`, `background`, `box-shadow`, ...) work, but declarations containing colour functions such as `rgba(...)` are dropped. Use hex colours instead, e.g. `#00000033` for a translucent black.
 
 ## License
 
@@ -114,7 +116,7 @@ GNU General Public License for more details.
 
 * **Security hardening**: all shortcode attributes are now sanitised and escaped before output (fixes stored XSS through attributes such as `doi`, `class`, `style`, `popover`, `type`).
 * `type`, `popover`, `details`, `float` and `hide_no_mentions` are checked against whitelists; invalid values fall back to the default or are dropped.
-* Inline `style` values are filtered with WordPress' `safecss_filter_attr()`.
+* Inline `style` values are filtered with WordPress' `safecss_filter_attr()`. Declarations using `rgba()` and similar functions are dropped by that filter: use hex colours instead (the README examples were updated accordingly).
 * The Altmetric embed script is now enqueued once in the footer with `wp_enqueue_script()`, instead of being prepended to every `the_content` call. Disable it with `add_filter('altmetric_embeds_load_script', '__return_false');`.
 * Direct access to the plugin file is blocked.
 
