@@ -110,6 +110,14 @@ GNU General Public License for more details.
 
 ## Changelog
 
+### 0.0.9 (2026)
+
+* **Security hardening**: all shortcode attributes are now sanitised and escaped before output (fixes stored XSS through attributes such as `doi`, `class`, `style`, `popover`, `type`).
+* `type`, `popover`, `details`, `float` and `hide_no_mentions` are checked against whitelists; invalid values fall back to the default or are dropped.
+* Inline `style` values are filtered with WordPress' `safecss_filter_attr()`.
+* The Altmetric embed script is now enqueued once in the footer with `wp_enqueue_script()`, instead of being prepended to every `the_content` call. Disable it with `add_filter('altmetric_embeds_load_script', '__return_false');`.
+* Direct access to the plugin file is blocked.
+
 ### 0.0.8 (2025)
 
 * **PHP 8.x compatibility fix**: declared all class methods as `static` to prevent fatal errors when used as WordPress filter/shortcode callbacks. The original code used non-static methods with a class-name string callback (`array('Altmetric', 'method')`), which was deprecated in PHP 7.x and causes a fatal error in PHP 8.x.
